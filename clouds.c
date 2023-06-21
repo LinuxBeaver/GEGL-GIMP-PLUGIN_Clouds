@@ -46,6 +46,12 @@ property_double (saturation, _("Saturation for the sky"), 0.6)
    value_range  (0.5, 1.0)
   ui_steps      (0.01, 0.10)
 
+property_double (hue, _("Hue Rotation (0 resets)"), 0)
+   description  (_("Hue rotation for non-realistic clouds"))
+  ui_range (-180, 180)
+   value_range  (-180, 180)
+  ui_steps      (0.01, 0.50)
+
 property_seed (seed, _("Random seed of clouds"), rand)
 
 #else
@@ -59,7 +65,7 @@ property_seed (seed, _("Random seed of clouds"), rand)
 static void attach (GeglOperation *operation)
 {
   GeglNode *gegl = operation->node;
-  GeglNode *input, *output, *over, *noise, *graph, *clip, *crop, *saturation,  *repairgeglgraph;
+  GeglNode *input, *output, *over, *noise, *graph, *clip, *hue, *crop, *saturation,  *repairgeglgraph;
 
   input    = gegl_node_get_input_proxy (gegl, "input");
   output   = gegl_node_get_output_proxy (gegl, "output");
@@ -91,6 +97,10 @@ static void attach (GeglOperation *operation)
                                   "operation", "gegl:crop",
                                   NULL);
 
+ hue   = gegl_node_new_child (gegl,
+                                  "operation", "gegl:hue-chroma",
+                                  NULL);
+
 
   repairgeglgraph      = gegl_node_new_child (gegl, "operation", "gegl:median-blur",
                                          "radius",       0,
@@ -101,9 +111,10 @@ static void attach (GeglOperation *operation)
   gegl_operation_meta_redirect (operation, "seed", noise, "seed");
   gegl_operation_meta_redirect (operation, "saturation", saturation, "scale");
   gegl_operation_meta_redirect (operation, "string", graph, "string");
+  gegl_operation_meta_redirect (operation, "hue", hue, "hue");
 
 
-  gegl_node_link_many (input, over, graph, clip, crop, saturation, repairgeglgraph, output, NULL);
+  gegl_node_link_many (input, over, graph, clip, crop, saturation, hue, repairgeglgraph, output, NULL);
   gegl_node_connect_from (over, "aux", noise, "output");
   gegl_node_link_many (input, noise, NULL);
 
