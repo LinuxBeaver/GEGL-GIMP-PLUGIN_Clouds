@@ -23,9 +23,18 @@
 
 #ifdef GEGL_PROPERTIES
 
+/*
+GEGL GRAPH TO TEST WITHOUT INSTALLING. Feed this syntax to Gimp's GEGL graph and get a static preview of this plugin.
 
-property_string (string, _("Graph"), STRINGGIVEN)
-    ui_meta     ("role", "output-extent")
+noise-solid detail=10 turbulent=22  seed=54 aa= tileable=true
+hue-chroma lightness=-22
+value-invert
+id=1
+hard-light aux=[ ref=1 color  value=#c3f2ff  ]
+opacity value=4
+id=2
+hard-light aux=[ ref=2 color  high-pass ]
+ */
 
 
 #define STRINGGIVEN \
@@ -34,7 +43,7 @@ property_string (string, _("Graph"), STRINGGIVEN)
 
 property_double (cloudsize, _("Scale clouds"), 4.0)
     description (_("Size of the clouds"))
-    value_range (1.5, 14.0)
+    value_range (0.5, 14.0)
     ui_range    (1.5, 9.0)
     ui_meta     ("unit", "pixel-distance")
   ui_steps      (0.01, 0.50)
@@ -78,7 +87,7 @@ static void attach (GeglOperation *operation)
 
 
    graph   = gegl_node_new_child (gegl,
-                                  "operation", "gegl:gegl",
+                                  "operation", "gegl:gegl", "string",  STRINGGIVEN,
                                   NULL);
 
    saturation   = gegl_node_new_child (gegl,
