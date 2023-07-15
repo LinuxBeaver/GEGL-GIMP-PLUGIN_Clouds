@@ -125,7 +125,7 @@ static void attach (GeglOperation *operation)
 
   gegl_node_link_many (input, over, graph, clip, crop, saturation, hue, repairgeglgraph, output, NULL);
   gegl_node_connect_from (over, "aux", noise, "output");
-  gegl_node_link_many (input, noise, NULL);
+
 
   
 }
