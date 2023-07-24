@@ -146,6 +146,8 @@ gegl_op_class_init (GeglOpClass *klass)
     "reference-hash", "b5ecl56oau1dgxsfge77g0laefe2g4f1b2ac",
     "description", _("GEGL renders a sky of clouds."
                      ""),
+    "gimp:menu-path", "<Image>/Filters/Render/Fun",
+    "gimp:menu-label", _("Clouds..."),
     NULL);
 }
 
