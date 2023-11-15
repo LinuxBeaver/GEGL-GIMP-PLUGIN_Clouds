@@ -119,7 +119,6 @@ static void attach (GeglOperation *operation)
   gegl_operation_meta_redirect (operation, "cloudsize", noise, "y-size");
   gegl_operation_meta_redirect (operation, "seed", noise, "seed");
   gegl_operation_meta_redirect (operation, "saturation", saturation, "scale");
-  gegl_operation_meta_redirect (operation, "string", graph, "string");
   gegl_operation_meta_redirect (operation, "hue", hue, "hue");
 
 
