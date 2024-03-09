@@ -123,7 +123,7 @@ static void attach (GeglOperation *operation)
 
 
   gegl_node_link_many (input, over, graph, clip, crop, saturation, hue, repairgeglgraph, output, NULL);
-  gegl_node_connect_from (over, "aux", noise, "output");
+  gegl_node_connect (over, "aux", noise, "output");
 
 
   
@@ -143,7 +143,7 @@ gegl_op_class_init (GeglOpClass *klass)
     "title",       _("Clouds"),
     "categories",  "Render",
     "reference-hash", "b5ecl56oau1dgxsfge77g0laefe2g4f1b2ac",
-    "description", _("GEGL renders a sky of clouds."
+    "description", _("Renders a sky of clouds."
                      ""),
     "gimp:menu-path", "<Image>/Filters/Render/Fun",
     "gimp:menu-label", _("Clouds..."),
