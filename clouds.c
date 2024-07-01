@@ -102,8 +102,11 @@ static void attach (GeglOperation *operation)
                                   "operation", "gegl:rgb-clip",
                                   NULL);
 
- crop   = gegl_node_new_child (gegl,
-                                  "operation", "gegl:crop",
+#define cropfun \
+"   nop "\
+
+crop   = gegl_node_new_child (gegl,
+                                  "operation", "gegl:gegl", "string", cropfun,
                                   NULL);
 
  hue   = gegl_node_new_child (gegl,
