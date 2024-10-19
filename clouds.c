@@ -102,11 +102,8 @@ static void attach (GeglOperation *operation)
                                   "operation", "gegl:rgb-clip",
                                   NULL);
 
-#define cropfun \
-"   nop "\
-
-crop   = gegl_node_new_child (gegl,
-                                  "operation", "gegl:gegl", "string", cropfun,
+ crop   = gegl_node_new_child (gegl,
+                                  "operation", "gegl:crop",
                                   NULL);
 
  hue   = gegl_node_new_child (gegl,
@@ -127,6 +124,7 @@ crop   = gegl_node_new_child (gegl,
 
   gegl_node_link_many (input, over, graph, clip, crop, saturation, hue, repairgeglgraph, output, NULL);
   gegl_node_connect (over, "aux", noise, "output");
+  gegl_node_connect (crop, "aux", input, "output");
 
 
   
