@@ -11,13 +11,16 @@ Windows
 C:\Users\USERNAME\AppData\Local\gegl-0.4\plug-ins
  
  Linux 
- /home/(USERNAME)/.local/share/gegl-0.4/plug-ins
+`~/.local/share/gegl-0.4/plug-ins`
  
  Linux (Flatpak)
- /home/(USERNAME)/.var/app/org.gimp.GIMP/data/gegl-0.4/plug-ins
+`~/.var/app/org.gimp.GIMP/data/gegl-0.4/plug-ins`
 
 
 ## Compiling and Installing
+
+Just run ./build_plugin_OS.sh or
+
 Linux
 
 To compile and install you will need the GEGL header files (libgegl-dev on Debian based distributions or gegl on Arch Linux) and meson (meson on most distributions).
@@ -39,3 +42,10 @@ Then build the same way you would on Linux:
 
 meson setup --buildtype=release build
 ninja -C build
+
+## more pics of this based plugin
+
+<img width="1177" height="659" alt="image" src="https://github.com/user-attachments/assets/0bde974d-65c8-4e37-bf59-0797357986d7" />
+
+<img width="1224" height="665" alt="image" src="https://github.com/user-attachments/assets/4872e0de-18aa-46a8-ae50-d99612e799b9" />
+
